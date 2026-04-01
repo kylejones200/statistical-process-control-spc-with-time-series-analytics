@@ -9,7 +9,7 @@ import argparse
 import yaml
 import logging
 from pathlib import Path
-from src.core import ((level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+from src.core import (
     generate_process_data,
     calculate_control_limits,
     identify_out_of_control,
