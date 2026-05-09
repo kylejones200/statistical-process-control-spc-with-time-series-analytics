@@ -35,7 +35,7 @@ def main():
     output_dir = Path(args.output_dir) if args.output_dir else Path(config['output']['figures_dir'])
     output_dir.mkdir(exist_ok=True)
     
-        df = generate_process_data(
+    df = generate_process_data(
         config['data']['start_date'],
         config['data']['periods'],
         config['data']['frequency'],
@@ -44,7 +44,7 @@ def main():
         config['data']['seed']
     )
     
-        limits = calculate_control_limits(df, config['control_limits']['sigma_multiplier'])
+    limits = calculate_control_limits(df, config['control_limits']['sigma_multiplier'])
     
     logging.info(f"Mean: {limits['mean']:.2f}")
     logging.info(f"Standard Deviation: {limits['std_dev']:.2f}")
