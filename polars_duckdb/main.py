@@ -7,7 +7,6 @@ import yaml
 import logging
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent))
 from core import generate_process_data, calculate_control_limits, add_control_flags, plot_control_chart
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
