@@ -2,7 +2,7 @@
 control processes to ensure they operate at their full potential.
 
 ### Statistical Process Control (SPC) with Time Series Analytics
-**Statistical Process Control (SPC)** is a method used to monitor and control processes to ensure they operate at their full potential.
+Statistical Process Control (SPC) is a method used to monitor and control processes to ensure they operate at their full potential.
 
 Statistical Process Control is an analytical approach to quality management that helps detect and prevent issues in real-time.
 
@@ -33,9 +33,9 @@ We calculate the control limits and visualize the data with Matplotlib.
 
 
 #### Interpreting the Control Chart
-1.  [**In-Control**: Points lie within the control limits (UCL and LCL).]
-2.  [**Out-of-Control**: Points outside the control limits indicate a problem that needs investigation.]
-3.  [**Patterns**: Consistent trends or shifts may indicate underlying issues, even if points remain within limits.]
+1.  [In-Control: Points lie within the control limits (UCL and LCL).]
+2.  [Out-of-Control: Points outside the control limits indicate a problem that needs investigation.]
+3.  [Patterns: Consistent trends or shifts may indicate underlying issues, even if points remain within limits.]
 
 #### Implementation Considerations
 Successful SPC implementation requires more than statistical knowledge. Organizations must consider data collection methods, measurement system analysis, and training requirements. The process begins with establishing clear objectives and selecting appropriate metrics. Regular review and adjustment of control limits ensure the system remains relevant as processes evolve.
