@@ -43,7 +43,7 @@ def identify_out_of_control(df: pd.DataFrame, limits: Dict[str, float]) -> pd.Se
 def plot_control_chart(df: pd.DataFrame, limits: Dict[str, float],
                       out_of_control: pd.Series, output_path: Path):
     """Plot control chart """
-                      if plot:
+    if plot:
         fig, ax = plt.subplots(figsize=(12, 6))
     
         ax.plot(df["Time"], df["Value"], label="Process Data", 
