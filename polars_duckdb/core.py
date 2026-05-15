@@ -9,9 +9,8 @@ import duckdb
 import polars as pl
 import numpy as np
 import matplotlib.pyplot as plt
-from datetime import date, timedelta
+from datetime import timedelta
 from pathlib import Path
-from typing import Dict
 
 
 def generate_process_data(
@@ -36,7 +35,7 @@ def generate_process_data(
 def calculate_control_limits(
     df: pl.DataFrame,
     sigma_multiplier: float = 3.0,
-) -> Dict[str, float]:
+) -> dict[str, float]:
     """Global mean and ±3σ limits via DuckDB aggregates."""
     return duckdb.sql(f"""
         SELECT

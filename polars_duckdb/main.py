@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Statistical Process Control — Polars + DuckDB rewrite."""
 
-import sys
 import argparse
 import yaml
 import logging
