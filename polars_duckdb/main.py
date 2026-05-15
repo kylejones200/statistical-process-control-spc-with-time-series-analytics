@@ -2,13 +2,20 @@
 """Statistical Process Control — Polars + DuckDB rewrite."""
 
 import argparse
-import yaml
 import logging
 from pathlib import Path
 
-from core import generate_process_data, calculate_control_limits, add_control_flags, plot_control_chart
+import yaml
+from core import (
+    add_control_flags,
+    calculate_control_limits,
+    generate_process_data,
+    plot_control_chart,
+)
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 def load_config(config_path: Path = None) -> dict:
@@ -24,8 +31,12 @@ def main():
     parser.add_argument("--output-dir", type=Path, default=None)
     args = parser.parse_args()
 
-    config    = load_config(args.config)
-    output_dir = Path(args.output_dir) if args.output_dir else Path(config["output"]["figures_dir"])
+    config = load_config(args.config)
+    output_dir = (
+        Path(args.output_dir)
+        if args.output_dir
+        else Path(config["output"]["figures_dir"])
+    )
     output_dir.mkdir(exist_ok=True)
     sigma = config["control_limits"]["sigma_multiplier"]
 
@@ -47,9 +58,11 @@ def main():
 
     # flags computed in the same DuckDB pass
     flagged = add_control_flags(df, sigma)
-    n_ooc   = flagged["out_of_control"].sum()
+    n_ooc = flagged["out_of_control"].sum()
     logging.info(f"\nOut-of-control points : {n_ooc} / {flagged.height}")
-    logging.info(f"\n{flagged.filter(flagged['out_of_control'] == 1).select(['Time','Value','ucl','lcl'])}")
+    logging.info(
+        f"\n{flagged.filter(flagged['out_of_control'] == 1).select(['Time', 'Value', 'ucl', 'lcl'])}"
+    )
 
     plot_control_chart(flagged, output_dir / "control_chart.png")
     logging.info(f"\nDone. Figures saved to {output_dir}")
