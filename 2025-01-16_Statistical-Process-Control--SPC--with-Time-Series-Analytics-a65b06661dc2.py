@@ -6,8 +6,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
 np.random.seed(42)
+
 time = pd.date_range(start="2023-01-01", periods=100, freq="D")
 values = np.random.normal(50, 2, 100)
 # Introduce out-of-control points

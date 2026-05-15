@@ -2,13 +2,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import logging
+np.random.seed(42)
 
 # --- Simulate process data ---
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
-np.random.seed(42)
 time = pd.date_range(start="2023-01-01", periods=100, freq="D")
 values = np.random.normal(50, 2, 100)
 values[30:35] += 8  # Out-of-control high
