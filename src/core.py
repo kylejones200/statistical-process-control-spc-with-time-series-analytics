@@ -54,49 +54,51 @@ def plot_control_chart(
     output_path: Path,
 ):
     """Plot control chart"""
-    if plot:
-        fig, ax = plt.subplots(figsize=(12, 6))
+    if not plot:
+        return
 
-        ax.plot(
-            df["Time"],
-            df["Value"],
-            label="Process Data",
-            color="#4A90A4",
-            linewidth=1.2,
-            marker="o",
-            markersize=3,
-        )
-        ax.axhline(
-            limits["mean"], color="#8B6F9E", linestyle="--", linewidth=1.2, label="Mean"
-        )
-        ax.axhline(
-            limits["ucl"],
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    ax.plot(
+        df["Time"],
+        df["Value"],
+        label="Process Data",
+        color="#4A90A4",
+        linewidth=1.2,
+        marker="o",
+        markersize=3,
+    )
+    ax.axhline(
+        limits["mean"], color="#8B6F9E", linestyle="--", linewidth=1.2, label="Mean"
+    )
+    ax.axhline(
+        limits["ucl"],
+        color="#D4A574",
+        linestyle="--",
+        linewidth=1.2,
+        label="Upper Control Limit (UCL)",
+    )
+    ax.axhline(
+        limits["lcl"],
+        color="#D4A574",
+        linestyle="--",
+        linewidth=1.2,
+        label="Lower Control Limit (LCL)",
+    )
+
+    if out_of_control.any():
+        ax.scatter(
+            df["Time"][out_of_control],
+            df["Value"][out_of_control],
             color="#D4A574",
-            linestyle="--",
-            linewidth=1.2,
-            label="Upper Control Limit (UCL)",
-        )
-        ax.axhline(
-            limits["lcl"],
-            color="#D4A574",
-            linestyle="--",
-            linewidth=1.2,
-            label="Lower Control Limit (LCL)",
+            s=50,
+            label="Out of Control",
+            zorder=5,
         )
 
-        if out_of_control.any():
-            ax.scatter(
-                df["Time"][out_of_control],
-                df["Value"][out_of_control],
-                color="#D4A574",
-                s=50,
-                label="Out of Control",
-                zorder=5,
-            )
+    ax.set_xlabel("Time")
+    ax.set_ylabel("Value")
+    ax.legend(loc="best", ncol=2)
 
-        ax.set_xlabel("Time")
-        ax.set_ylabel("Value")
-        ax.legend(loc="best", ncol=2)
-
-        plt.savefig(output_path, dpi=100, bbox_inches="tight")
-        plt.close()
+    plt.savefig(output_path, dpi=100, bbox_inches="tight")
+    plt.close()

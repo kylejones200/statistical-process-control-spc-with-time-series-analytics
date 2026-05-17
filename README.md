@@ -34,3 +34,11 @@ Edit `config.yaml` to customize:
 - By default, the script generates synthetic process data with known out-of-control periods.
 - Control limits are calculated using ±3σ (standard deviation) from the mean.
 - Points outside control limits are flagged as out-of-control.
+
+## Disclaimer
+
+Educational/demo code only. Not financial, safety, or engineering advice. Use at your own risk. Verify results independently before any production or operational use.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
