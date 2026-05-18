@@ -18,7 +18,7 @@ logging.basicConfig(
 )
 
 
-def load_config(config_path: Path = None) -> dict:
+def load_config(config_path: Path | None = None) -> dict:
     if config_path is None:
         config_path = Path(__file__).parent.parent / "config.yaml"
     with open(config_path) as f:
@@ -30,7 +30,6 @@ def main():
     parser.add_argument("--config", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, default=None)
     args = parser.parse_args()
-
     config = load_config(args.config)
     output_dir = (
         Path(args.output_dir)
@@ -39,7 +38,6 @@ def main():
     )
     output_dir.mkdir(exist_ok=True)
     sigma = config["control_limits"]["sigma_multiplier"]
-
     df = generate_process_data(
         config["data"]["start_date"],
         config["data"]["periods"],
@@ -48,14 +46,12 @@ def main():
         config["data"]["std"],
         config["data"]["seed"],
     )
-
     # limits from DuckDB aggregates
     limits = calculate_control_limits(df, sigma)
     logging.info(f"Control limits (σ×{sigma}):")
     logging.info(f"  Mean : {limits['mean']:.3f}")
     logging.info(f"  UCL  : {limits['ucl']:.3f}")
     logging.info(f"  LCL  : {limits['lcl']:.3f}")
-
     # flags computed in the same DuckDB pass
     flagged = add_control_flags(df, sigma)
     n_ooc = flagged["out_of_control"].sum()
@@ -63,7 +59,6 @@ def main():
     logging.info(
         f"\n{flagged.filter(flagged['out_of_control'] == 1).select(['Time', 'Value', 'ucl', 'lcl'])}"
     )
-
     plot_control_chart(flagged, output_dir / "control_chart.png")
     logging.info(f"\nDone. Figures saved to {output_dir}")
 

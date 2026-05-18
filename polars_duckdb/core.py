@@ -91,7 +91,6 @@ def plot_control_chart(
     ucl = df["ucl"][0]
     lcl = df["lcl"][0]
     ooc_mask = [v == 1 for v in df["out_of_control"].to_list()]
-
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.plot(
         times,
@@ -105,7 +104,6 @@ def plot_control_chart(
     ax.axhline(mean, color="#8B6F9E", linestyle="--", linewidth=1.2, label="Mean")
     ax.axhline(ucl, color="#D4A574", linestyle="--", linewidth=1.2, label="UCL")
     ax.axhline(lcl, color="#D4A574", linestyle="--", linewidth=1.2, label="LCL")
-
     ooc_times = [t for t, m in zip(times, ooc_mask) if m]
     ooc_values = [v for v, m in zip(values, ooc_mask) if m]
     if ooc_times:

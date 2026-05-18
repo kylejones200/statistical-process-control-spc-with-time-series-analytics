@@ -1,6 +1,5 @@
 # Description: Short example for Statistical Process Control SPC with Time Series Analytics.
 
-
 # Generate simulated process data
 
 import matplotlib.pyplot as plt
@@ -10,7 +9,6 @@ import pandas as pd
 
 def main():
     np.random.seed(42)
-
     time = pd.date_range(start="2023-01-01", periods=100, freq="D")
     values = np.random.normal(50, 2, 100)
     # Introduce out-of-control points
@@ -18,7 +16,6 @@ def main():
     values[70:75] -= 8
     # Create a DataFrame
     df = pd.DataFrame({"Time": time, "Value": values})
-
 
     # Calculate control limits
     mean = df["Value"].mean()
