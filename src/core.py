@@ -26,7 +26,7 @@ def identify_out_of_control(df: pd.DataFrame, limits: Dict[str, float]) -> pd.Se
     """Identify out-of-control points."""
     return (df['Value'] > limits['ucl']) | (df['Value'] < limits['lcl'])
 
-def plot_control_chart(df: pd.DataFrame, limits: Dict[str, float], out_of_control: pd.Series, output_path: Path, plot: bool = False):
+def plot_control_chart(df: pd.DataFrame, limits: Dict[str, float], out_of_control: pd.Series, output_path: Path, plot: bool=False):
     """Plot control chart"""
     if not plot:
         return
